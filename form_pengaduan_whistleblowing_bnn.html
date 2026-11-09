@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Formulir Pengaduan Whistleblowing - contoh implementasi mandiri." />
+  <title>Form Pengaduan Whistleblowing</title>
+  <style>
+    :root{--navy:#123b68;--blue:#1769aa;--gold:#e0ad42;--ink:#243447;--muted:#687789;--line:#dce4ec;--bg:#f3f6fa;--white:#fff;--danger:#b42318;--green:#18794e}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Arial,Helvetica,sans-serif}
+    .topbar{background:var(--navy);color:#fff;padding:12px 20px}.topbar-inner{max-width:1120px;margin:auto;display:flex;align-items:center;gap:14px}
+    .mark{width:48px;height:48px;border:2px solid rgba(255,255,255,.75);border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:12px;letter-spacing:.5px}
+    .brand strong{display:block;font-size:17px;letter-spacing:.3px}.brand span{font-size:12px;opacity:.85}
+    .hero{background:linear-gradient(115deg,#123b68,#1769aa);color:#fff;padding:38px 20px 54px;border-bottom:5px solid var(--gold)}.hero-inner{max-width:960px;margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:1.6px;font-size:11px;font-weight:bold;color:#f5d58e}.hero h1{font-size:clamp(26px,4vw,38px);line-height:1.15;margin:9px 0}.hero p{max-width:720px;margin:10px 0 0;color:#e7eef6}
+    main{max-width:960px;margin:-25px auto 48px;padding:0 18px}.panel{background:var(--white);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 32px rgba(21,48,77,.09);padding:clamp(20px,4vw,38px)}
+    .notice{background:#eef6fc;border-left:4px solid var(--blue);padding:13px 16px;border-radius:5px;color:#31516e;margin-bottom:26px;font-size:14px}
+    fieldset{border:0;padding:0;margin:0 0 28px}legend{font-size:17px;font-weight:700;color:var(--navy);width:100%;padding:0 0 10px;margin-bottom:17px;border-bottom:1px solid var(--line)}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px}.field{min-width:0}.full{grid-column:1/-1}label{display:block;font-weight:600;margin-bottom:7px;font-size:13px;color:#34495e}label .req{color:var(--danger)}
+    input,select,textarea{width:100%;border:1px solid #cbd5df;border-radius:7px;background:#fff;padding:11px 12px;font:inherit;color:var(--ink);outline:none;transition:border .15s,box-shadow .15s}
+    input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(23,105,170,.12)}textarea{min-height:150px;resize:vertical}input[type=file]{padding:9px;background:#fbfcfe}input[type=checkbox]{width:17px;height:17px;accent-color:var(--blue);margin:2px 0 0}
+    .hint{font-size:12px;color:var(--muted);margin:6px 0 0}.checkline{display:flex;align-items:flex-start;gap:10px;font-weight:400;line-height:1.45}.checkline label{font-weight:400;margin:0;font-size:14px}
+    .actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px}.btn{border:0;border-radius:7px;background:var(--blue);color:#fff;font-weight:700;padding:13px 24px;font-size:15px;cursor:pointer}.btn:hover{background:var(--navy)}.btn:disabled{opacity:.65;cursor:not-allowed}.secondary{background:#eef2f6;color:#34495e}.status{font-size:13px;color:var(--muted)}
+    footer{background:#102f50;color:#dbe5ef;padding:30px 20px}.footer-inner{max-width:960px;margin:auto;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}.footer-inner strong{color:#fff}.footer-inner p{margin:5px 0;font-size:13px}
+    .modal-note{font-size:12px;color:#64748b;margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+    @media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.hero{padding:30px 18px 45px}.topbar{padding:10px 16px}.mark{width:42px;height:42px}.panel{padding:21px 17px}.footer-inner{display:block}.footer-inner>div+div{margin-top:18px}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="mark" aria-hidden="true">BNN</div>
+      <div class="brand"><strong>BADAN NARKOTIKA NASIONAL</strong><span>Inspektorat Utama · Kanal Pengaduan</span></div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Layanan Pengaduan</div>
+      <h1>Form Pengaduan Whistleblowing</h1>
+      <p>Mohon mengisi data-data yang akurat sesuai yang diperlukan. Dalam penerapan sebenarnya, informasi pengaduan harus dikelola secara aman dan hanya dapat diakses oleh petugas yang berwenang.</p>
+    </div>
+  </section>
+
+  <main>
+    <section class="panel">
+      <div class="notice"><strong>Petunjuk pengisian:</strong> Isilah setiap kolom wajib dengan informasi yang benar dan jelas. Hindari mencantumkan informasi yang tidak berkaitan dengan pengaduan.</div>
+      <form id="complaintForm">
+        <fieldset>
+          <legend>Informasi Pengaduan</legend>
+          <div class="grid">
+            <div class="field">
+              <label for="jenis">Jenis Masalah / Pelanggaran / Penyimpangan <span class="req">*</span></label>
+              <select id="jenis" name="jenis" required>
+                <option value="">-- Pilih jenis pengaduan --</option>
+                <option>Dugaan penyalahgunaan wewenang</option><option>Korupsi / penyalahgunaan anggaran</option><option>Suap / pungutan liar</option><option>Gratifikasi</option><option>Pelanggaran disiplin / kode etik</option><option>Pelanggaran standar pelayanan publik</option><option>Konflik kepentingan</option><option>Lainnya</option>
+              </select>
+            </div>
+            <div class="field"><label for="kategori">Kategori Pelapor <span class="req">*</span></label>
+              <select id="kategori" name="kategori" required><option value="">-- Pilih kategori --</option><option>Pegawai / internal BNN</option><option>Masyarakat</option><option>Mitra kerja / penyedia</option><option>Lainnya</option></select>
+            </div>
+            <div class="field"><label for="nama">Nama Pelapor</label><input id="nama" name="nama" type="text" autocomplete="name" placeholder="Masukkan nama pelapor" /></div>
+            <div class="field"><label for="email">Email Pelapor</label><input id="email" name="email" type="email" autocomplete="email" placeholder="nama@contoh.com" /></div>
+            <div class="field"><label for="lokasi">Lokasi Kejadian <span class="req">*</span></label><input id="lokasi" name="lokasi" required placeholder="Contoh: Kantor / unit / alamat kejadian" /></div>
+            <div class="field"><label for="kabupaten">Nama Kota/Kabupaten <span class="req">*</span></label><input id="kabupaten" name="kabupaten" required placeholder="Masukkan kota/kabupaten" /></div>
+            <div class="field"><label for="provinsi">Nama Provinsi <span class="req">*</span></label><input id="provinsi" name="provinsi" required placeholder="Masukkan provinsi" /></div>
+            <div class="field"><label for="satker">Satuan Kerja Terlapor <span class="req">*</span></label>
+              <select id="satker" name="satker" required><option value="">-- Pilih satuan kerja --</option><option>BNN Pusat</option><option>Sekretariat Utama</option><option>Inspektorat Utama</option><option>Deputi Bidang Pencegahan</option><option>Deputi Bidang Pemberdayaan Masyarakat</option><option>Deputi Bidang Pemberantasan</option><option>Deputi Bidang Rehabilitasi</option><option>Deputi Bidang Hukum dan Kerja Sama</option><option>BNN Provinsi</option><option>BNN Kabupaten/Kota</option><option>Lainnya</option></select>
+            </div>
+            <div class="field"><label for="tanggal">Tanggal Perkiraan Kejadian <span class="req">*</span></label><input id="tanggal" name="tanggal" type="date" required /></div>
+            <div class="field"><label for="waktu">Waktu Perkiraan Kejadian</label><input id="waktu" name="waktu" type="time" /></div>
+            <div class="field"><label for="hp">No. Handphone yang dapat dihubungi</label><input id="hp" name="hp" type="tel" autocomplete="tel" placeholder="Contoh: 08xxxxxxxxxx" /></div>
+            <div class="field"><label for="kategoriPenyimpangan">Kategori Satuan Penyimpangan</label><input id="kategoriPenyimpangan" name="kategoriPenyimpangan" placeholder="Tuliskan kategori jika diketahui" /></div>
+            <div class="field full"><label for="uraian">Uraian Pengaduan <span class="req">*</span></label><textarea id="uraian" name="uraian" required minlength="20" placeholder="Jelaskan kronologi, pihak yang terlibat (jika diketahui), waktu, tempat, dan informasi pendukung secara rinci..."></textarea><p class="hint">Minimal 20 karakter. Sampaikan fakta yang Anda ketahui secara jelas.</p></div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Lampiran Pendukung</legend>
+          <div class="grid">
+            <div class="field"><label for="lampiran">Lampiran Dokumen</label><input id="lampiran" name="lampiran" type="file" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png" /><p class="hint">Format: PDF, DOC, DOCX, XLS, XLSX, JPG, PNG.</p></div>
+            <div class="field"><label for="gambar">Upload Gambar</label><input id="gambar" name="gambar" type="file" multiple accept="image/*" /><p class="hint">Unggah gambar yang relevan dengan pengaduan.</p></div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Pernyataan</legend>
+          <div class="checkline"><input id="pernyataan" name="pernyataan" type="checkbox" required /><label for="pernyataan">Data dan informasi yang saya berikan adalah benar dan dapat dipertanggungjawabkan. <span class="req">*</span></label></div>
+        </fieldset>
+        <div class="actions"><button class="btn" type="submit">Kirim Aduan</button><button class="btn secondary" type="reset">Kosongkan Formulir</button><span class="status" id="status" role="status" aria-live="polite"></span></div>
+      </form>
+      <div class="modal-note"><strong>Informasi teknis:</strong> Halaman contoh ini berjalan di browser dan belum mengirim data ke server. Jangan memasukkan data pengaduan nyata atau informasi sensitif sebelum backend, enkripsi, kontrol akses, kebijakan retensi, dan kanal penerimaan resmi disiapkan.</div>
+    </section>
+  </main>
+
+  <footer><div class="footer-inner"><div><strong>Badan Narkotika Nasional</strong><p>Contoh antarmuka formulir pengaduan Whistleblowing.</p></div><div><strong>Kontak BNN</strong><p>Jl. M.T. Haryono No. 11, Cawang, Jakarta Timur</p><p>Call Center: 184</p><p><a href="https://bnn.go.id/" style="color:#fff">Situs resmi BNN</a></p></div></div></footer>
+
+  <script>
+    const form = document.getElementById('complaintForm');
+    const statusText = document.getElementById('status');
+    const maxFileSize = 10 * 1024 * 1024; // 10 MB per file
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      statusText.textContent = '';
+      if (!form.reportValidity()) return;
+
+      const files = [...document.getElementById('lampiran').files, ...document.getElementById('gambar').files];
+      const tooLarge = files.find(file => file.size > maxFileSize);
+      if (tooLarge) {
+        statusText.textContent = 'File "' + tooLarge.name + '" melebihi batas contoh 10 MB.';
+        statusText.style.color = '#b42318';
+        return;
+      }
+
+      statusText.textContent = 'Validasi formulir berhasil. Belum dikirim: hubungkan formulir ini ke backend resmi terlebih dahulu.';
+      statusText.style.color = '#18794e';
+      // Integrasi backend dapat dilakukan di sini menggunakan fetch() ke endpoint HTTPS.
+      // Jangan menyimpan data pengaduan sensitif hanya di localStorage atau mengirimkannya
+      // ke endpoint yang tidak terverifikasi.
+    });
+
+    form.addEventListener('reset', function () {
+      statusText.textContent = '';
+    });
+  </script>
+</body>
+</html>
